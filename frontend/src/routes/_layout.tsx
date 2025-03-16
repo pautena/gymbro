@@ -90,7 +90,7 @@ function Layout() {
     <DrawerLayout
       variant="mini"
       navigation={sidebarNav}
-      title="My Full Stack Template"
+      title="Gymbro"
       slotsProps={{
         drawerAppBar: {
           children: drawerAppBarContent,
