@@ -24,6 +24,7 @@ from app.core.config import settings # noqa
 # Import your models
 from app.users.models import User # noqa
 from app.items.models import Item # noqa
+from app.workouts.models import Workout # noqa
 
 target_metadata = SQLModel.metadata
 
