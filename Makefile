@@ -23,6 +23,6 @@ generate-client:
 	op run --env-file=".env" -- ./scripts/generate-client.sh
 
 backend-bash:
-	op run --env-file=".env" -- docker compose exec backend bash
+	docker compose exec backend bash
 
 .PHONY: watch up build playwright generate-client up-detached backend-bash
