@@ -20,8 +20,9 @@ import { Route as LayoutIndexImport } from './routes/_layout/index'
 import { Route as LayoutSettingsImport } from './routes/_layout/settings'
 import { Route as LayoutItemsImport } from './routes/_layout/items'
 import { Route as LayoutAdminImport } from './routes/_layout/admin'
-import { Route as LayoutWorkoutsIndexImport } from './routes/_layout/workouts.index'
-import { Route as LayoutWorkoutsAddImport } from './routes/_layout/workouts.add'
+import { Route as LayoutWorkoutsIndexImport } from './routes/_layout/workouts/index'
+import { Route as LayoutWorkoutsAddImport } from './routes/_layout/workouts/add'
+import { Route as LayoutWorkoutsIdImport } from './routes/_layout/workouts/$id'
 
 // Create/Update Routes
 
@@ -87,6 +88,12 @@ const LayoutWorkoutsIndexRoute = LayoutWorkoutsIndexImport.update({
 const LayoutWorkoutsAddRoute = LayoutWorkoutsAddImport.update({
   id: '/workouts/add',
   path: '/workouts/add',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutWorkoutsIdRoute = LayoutWorkoutsIdImport.update({
+  id: '/workouts/$id',
+  path: '/workouts/$id',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -157,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIndexImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/workouts/$id': {
+      id: '/_layout/workouts/$id'
+      path: '/workouts/$id'
+      fullPath: '/workouts/$id'
+      preLoaderRoute: typeof LayoutWorkoutsIdImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/workouts/add': {
       id: '/_layout/workouts/add'
       path: '/workouts/add'
@@ -181,6 +195,7 @@ interface LayoutRouteChildren {
   LayoutItemsRoute: typeof LayoutItemsRoute
   LayoutSettingsRoute: typeof LayoutSettingsRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutWorkoutsIdRoute: typeof LayoutWorkoutsIdRoute
   LayoutWorkoutsAddRoute: typeof LayoutWorkoutsAddRoute
   LayoutWorkoutsIndexRoute: typeof LayoutWorkoutsIndexRoute
 }
@@ -190,6 +205,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutItemsRoute: LayoutItemsRoute,
   LayoutSettingsRoute: LayoutSettingsRoute,
   LayoutIndexRoute: LayoutIndexRoute,
+  LayoutWorkoutsIdRoute: LayoutWorkoutsIdRoute,
   LayoutWorkoutsAddRoute: LayoutWorkoutsAddRoute,
   LayoutWorkoutsIndexRoute: LayoutWorkoutsIndexRoute,
 }
@@ -207,6 +223,7 @@ export interface FileRoutesByFullPath {
   '/items': typeof LayoutItemsRoute
   '/settings': typeof LayoutSettingsRoute
   '/': typeof LayoutIndexRoute
+  '/workouts/$id': typeof LayoutWorkoutsIdRoute
   '/workouts/add': typeof LayoutWorkoutsAddRoute
   '/workouts': typeof LayoutWorkoutsIndexRoute
 }
@@ -220,6 +237,7 @@ export interface FileRoutesByTo {
   '/items': typeof LayoutItemsRoute
   '/settings': typeof LayoutSettingsRoute
   '/': typeof LayoutIndexRoute
+  '/workouts/$id': typeof LayoutWorkoutsIdRoute
   '/workouts/add': typeof LayoutWorkoutsAddRoute
   '/workouts': typeof LayoutWorkoutsIndexRoute
 }
@@ -235,6 +253,7 @@ export interface FileRoutesById {
   '/_layout/items': typeof LayoutItemsRoute
   '/_layout/settings': typeof LayoutSettingsRoute
   '/_layout/': typeof LayoutIndexRoute
+  '/_layout/workouts/$id': typeof LayoutWorkoutsIdRoute
   '/_layout/workouts/add': typeof LayoutWorkoutsAddRoute
   '/_layout/workouts/': typeof LayoutWorkoutsIndexRoute
 }
@@ -251,6 +270,7 @@ export interface FileRouteTypes {
     | '/items'
     | '/settings'
     | '/'
+    | '/workouts/$id'
     | '/workouts/add'
     | '/workouts'
   fileRoutesByTo: FileRoutesByTo
@@ -263,6 +283,7 @@ export interface FileRouteTypes {
     | '/items'
     | '/settings'
     | '/'
+    | '/workouts/$id'
     | '/workouts/add'
     | '/workouts'
   id:
@@ -276,6 +297,7 @@ export interface FileRouteTypes {
     | '/_layout/items'
     | '/_layout/settings'
     | '/_layout/'
+    | '/_layout/workouts/$id'
     | '/_layout/workouts/add'
     | '/_layout/workouts/'
   fileRoutesById: FileRoutesById
@@ -321,6 +343,7 @@ export const routeTree = rootRoute
         "/_layout/items",
         "/_layout/settings",
         "/_layout/",
+        "/_layout/workouts/$id",
         "/_layout/workouts/add",
         "/_layout/workouts/"
       ]
@@ -353,12 +376,16 @@ export const routeTree = rootRoute
       "filePath": "_layout/index.tsx",
       "parent": "/_layout"
     },
+    "/_layout/workouts/$id": {
+      "filePath": "_layout/workouts/$id.tsx",
+      "parent": "/_layout"
+    },
     "/_layout/workouts/add": {
-      "filePath": "_layout/workouts.add.tsx",
+      "filePath": "_layout/workouts/add.tsx",
       "parent": "/_layout"
     },
     "/_layout/workouts/": {
-      "filePath": "_layout/workouts.index.tsx",
+      "filePath": "_layout/workouts/index.tsx",
       "parent": "/_layout"
     }
   }

@@ -109,16 +109,26 @@ export type ValidationError = {
 
 export type WorkoutCreate = {
     name: string;
+    notes: (string | null);
+    date?: string;
 };
 
 export type WorkoutPublic = {
     name: string;
+    notes: (string | null);
+    date?: string;
     id: string;
 };
 
 export type WorkoutsPublic = {
     data: Array<WorkoutPublic>;
     count: number;
+};
+
+export type WorkoutUpdate = {
+    name?: (string | null);
+    notes: (string | null);
+    date?: (string | null);
 };
 
 export type ItemsReadItemsData = {
@@ -259,3 +269,22 @@ export type WorkoutsCreateWorkoutData = {
 };
 
 export type WorkoutsCreateWorkoutResponse = (WorkoutPublic);
+
+export type WorkoutsReadWorkoutData = {
+    id: string;
+};
+
+export type WorkoutsReadWorkoutResponse = (WorkoutPublic);
+
+export type WorkoutsUpdateItemData = {
+    id: string;
+    requestBody: WorkoutUpdate;
+};
+
+export type WorkoutsUpdateItemResponse = (WorkoutPublic);
+
+export type WorkoutsDeleteWorkoutData = {
+    id: string;
+};
+
+export type WorkoutsDeleteWorkoutResponse = (Message);

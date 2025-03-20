@@ -7,22 +7,22 @@ import {
   DataGrid,
   type GridColDef,
   type GridPaginationModel,
+  type GridRowParams,
 } from "@mui/x-data-grid"
 import { HeaderLayout } from "@pautena/react-design-system"
-import { type WorkoutPublic, WorkoutsService } from "../../client"
+import { type WorkoutPublic, WorkoutsService } from "../../../client"
 
-const itemsSearchSchema = z.object({
-  page: z.number().catch(0),
+const PAGE_SIZE = 5
+const workoutsSearchSchema = z.object({
+  page: z.number().optional().default(0),
 })
 
 export const Route = createFileRoute("/_layout/workouts/")({
   component: Workouts,
-  validateSearch: (search) => itemsSearchSchema.parse(search),
+  validateSearch: (search) => workoutsSearchSchema.parse(search),
 })
 
-const PAGE_SIZE = 5
-
-function getWoroutsQueryOptions({ page }: { page: number }) {
+function getWorkoutsQueryOptions({ page }: { page: number }) {
   return {
     queryFn: () =>
       WorkoutsService.readWorkouts({
@@ -45,7 +45,7 @@ function Workouts() {
     isPending,
     isPlaceholderData,
   } = useQuery({
-    ...getWoroutsQueryOptions({ page }),
+    ...getWorkoutsQueryOptions({ page }),
     placeholderData: (prevData) => prevData,
   })
 
@@ -53,7 +53,7 @@ function Workouts() {
 
   useEffect(() => {
     if (hasNextPage) {
-      queryClient.prefetchQuery(getWoroutsQueryOptions({ page: page + 1 }))
+      queryClient.prefetchQuery(getWorkoutsQueryOptions({ page: page + 1 }))
     }
   }, [page, queryClient, hasNextPage])
 
@@ -64,6 +64,10 @@ function Workouts() {
     },
     {
       field: "name",
+      width: 200,
+    },
+    {
+      field: "date",
       width: 200,
     },
   ]
@@ -83,9 +87,15 @@ function Workouts() {
         paginationMode="server"
         rows={workouts?.data || []}
         rowCount={workouts?.count || 0}
+        onRowClick={({ row: { id } }: GridRowParams<WorkoutPublic>) =>
+          navigate({ to: "/workouts/$id", params: { id } })
+        }
         pageSizeOptions={[PAGE_SIZE]}
         paginationModel={{ page: page, pageSize: PAGE_SIZE }}
         onPaginationModelChange={handlePaginationModelChange}
+        sx={{
+          ".MuiDataGrid-row": { cursor: "pointer" },
+        }}
       />
     </HeaderLayout>
   )
