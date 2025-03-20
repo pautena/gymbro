@@ -11,12 +11,7 @@ import {
   type GridColDef,
   type GridPaginationModel,
 } from "@mui/x-data-grid"
-import {
-  Content,
-  Header,
-  HeaderLayout,
-  useDialog,
-} from "@pautena/react-design-system"
+import { HeaderLayout, useDialog } from "@pautena/react-design-system"
 import { type ItemPublic, ItemsService } from "../../client"
 import { AddItem } from "../../components/Items/AddItem"
 import { DeleteItem } from "../../components/Items/DeleteItem"

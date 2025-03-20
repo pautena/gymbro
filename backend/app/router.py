@@ -6,12 +6,14 @@ from app.items import routes as items_routes
 from app.users import private_routes as users_private_routes
 from app.users import routes as users_routes
 from app.utils import routes as utils_routes
+from app.workouts import routes as workouts_routes
 
 api_router = APIRouter()
 api_router.include_router(items_routes.router)
 api_router.include_router(auth_routes.router)
 api_router.include_router(utils_routes.router)
 api_router.include_router(users_routes.router)
+api_router.include_router(workouts_routes.router)
 
 
 if settings.ENVIRONMENT == "local":
