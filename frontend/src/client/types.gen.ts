@@ -44,13 +44,6 @@ export type NewPassword = {
     new_password: string;
 };
 
-export type PrivateUserCreate = {
-    email: string;
-    password: string;
-    full_name: string;
-    is_verified?: boolean;
-};
-
 export type Token = {
     access_token: string;
     token_type?: string;
@@ -109,13 +102,13 @@ export type ValidationError = {
 
 export type WorkoutCreate = {
     name: string;
-    notes: (string | null);
+    notes?: (string | null);
     date?: string;
 };
 
 export type WorkoutPublic = {
     name: string;
-    notes: (string | null);
+    notes?: (string | null);
     date?: string;
     id: string;
 };
@@ -127,7 +120,7 @@ export type WorkoutsPublic = {
 
 export type WorkoutUpdate = {
     name?: (string | null);
-    notes: (string | null);
+    notes?: (string | null);
     date?: (string | null);
 };
 
@@ -188,12 +181,6 @@ export type LoginRecoverPasswordHtmlContentData = {
 };
 
 export type LoginRecoverPasswordHtmlContentResponse = (string);
-
-export type PrivateCreateUserData = {
-    requestBody: PrivateUserCreate;
-};
-
-export type PrivateCreateUserResponse = (UserPublic);
 
 export type UsersReadUsersData = {
     limit?: number;
@@ -276,12 +263,12 @@ export type WorkoutsReadWorkoutData = {
 
 export type WorkoutsReadWorkoutResponse = (WorkoutPublic);
 
-export type WorkoutsUpdateItemData = {
+export type WorkoutsUpdateWorkoutData = {
     id: string;
     requestBody: WorkoutUpdate;
 };
 
-export type WorkoutsUpdateItemResponse = (WorkoutPublic);
+export type WorkoutsUpdateWorkoutResponse = (WorkoutPublic);
 
 export type WorkoutsDeleteWorkoutData = {
     id: string;
