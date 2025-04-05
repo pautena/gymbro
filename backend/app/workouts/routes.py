@@ -1,12 +1,21 @@
-from typing import Any
 import uuid
-from app.models import Message
-from app.users.dependencies import CurrentUser, SessionDep
+from typing import Any
+
 from fastapi import APIRouter, HTTPException
-from app.workouts.models import Workout, WorkoutCreate, WorkoutPublic, WorkoutUpdate, WorkoutsPublic
 from sqlmodel import func, select
 
+from app.models import Message
+from app.users.dependencies import CurrentUser, SessionDep
+from app.workouts.models import (
+    Workout,
+    WorkoutCreate,
+    WorkoutPublic,
+    WorkoutsPublic,
+    WorkoutUpdate,
+)
+
 router = APIRouter(prefix="/workouts", tags=["workouts"])
+
 
 @router.get("/", response_model=WorkoutsPublic)
 def read_workouts(
@@ -38,6 +47,7 @@ def read_workouts(
 
     return WorkoutsPublic(data=workouts, count=count)
 
+
 @router.get("/{id}", response_model=WorkoutPublic)
 def read_workout(session: SessionDep, current_user: CurrentUser, id: uuid.UUID) -> Any:
     """
@@ -49,7 +59,6 @@ def read_workout(session: SessionDep, current_user: CurrentUser, id: uuid.UUID) 
     if not current_user.is_superuser and (workout.owner_id != current_user.id):
         raise HTTPException(status_code=400, detail="Not enough permissions")
     return workout
-
 
 
 @router.post("/", response_model=WorkoutPublic)
@@ -67,7 +76,7 @@ def create_workout(
 
 
 @router.put("/{id}", response_model=WorkoutPublic)
-def update_item(
+def update_workout(
     *,
     session: SessionDep,
     current_user: CurrentUser,
