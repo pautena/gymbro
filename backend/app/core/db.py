@@ -5,6 +5,7 @@ from app.core.config import settings
 from app.items.models import *  # noqa: F403
 from app.users import repository as users_repository
 from app.users.models import User, UserCreate
+from app.workouts.models import *  # noqa: F403
 
 engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
 

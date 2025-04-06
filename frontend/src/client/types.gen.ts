@@ -100,6 +100,30 @@ export type ValidationError = {
     type: string;
 };
 
+export type WorkoutCreate = {
+    name: string;
+    notes?: (string | null);
+    date?: string;
+};
+
+export type WorkoutPublic = {
+    name: string;
+    notes?: (string | null);
+    date?: string;
+    id: string;
+};
+
+export type WorkoutsPublic = {
+    data: Array<WorkoutPublic>;
+    count: number;
+};
+
+export type WorkoutUpdate = {
+    name?: (string | null);
+    notes?: (string | null);
+    date?: (string | null);
+};
+
 export type ItemsReadItemsData = {
     limit?: number;
     skip?: number;
@@ -219,3 +243,35 @@ export type UtilsTestEmailData = {
 export type UtilsTestEmailResponse = (Message);
 
 export type UtilsHealthCheckResponse = (boolean);
+
+export type WorkoutsReadWorkoutsData = {
+    limit?: number;
+    skip?: number;
+};
+
+export type WorkoutsReadWorkoutsResponse = (WorkoutsPublic);
+
+export type WorkoutsCreateWorkoutData = {
+    requestBody: WorkoutCreate;
+};
+
+export type WorkoutsCreateWorkoutResponse = (WorkoutPublic);
+
+export type WorkoutsReadWorkoutData = {
+    id: string;
+};
+
+export type WorkoutsReadWorkoutResponse = (WorkoutPublic);
+
+export type WorkoutsUpdateWorkoutData = {
+    id: string;
+    requestBody: WorkoutUpdate;
+};
+
+export type WorkoutsUpdateWorkoutResponse = (WorkoutPublic);
+
+export type WorkoutsDeleteWorkoutData = {
+    id: string;
+};
+
+export type WorkoutsDeleteWorkoutResponse = (Message);
