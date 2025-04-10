@@ -1,19 +1,19 @@
-import { CssBaseline, type PaletteMode } from "@mui/material"
-import { ThemeProvider } from "@mui/material/styles"
-import { NotificationCenterProvider } from "@pautena/react-design-system"
-import { QueryClientProvider } from "@tanstack/react-query"
-import { QueryClient } from "@tanstack/react-query"
-import { RouterProvider } from "@tanstack/react-router"
-import { createRouter } from "@tanstack/react-router"
-import { StrictMode, useMemo, useState } from "react"
-import { OpenAPI } from "./client"
-import { routeTree } from "./routeTree.gen"
-import { ColorModeContext, createTheme } from "./theme"
+import { CssBaseline, type PaletteMode } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { NotificationCenterProvider } from "@pautena/react-design-system";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
+import { RouterProvider } from "@tanstack/react-router";
+import { createRouter } from "@tanstack/react-router";
+import { StrictMode, useMemo, useState } from "react";
+import { client } from "./client/client.gen";
+import { routeTree } from "./routeTree.gen";
+import { ColorModeContext, createTheme } from "./theme";
 
-OpenAPI.BASE = import.meta.env.VITE_API_URL
-OpenAPI.TOKEN = async () => {
-  return localStorage.getItem("access_token") || ""
-}
+client.setConfig({
+	baseUrl: import.meta.env.VITE_API_URL,
+	auth: () => localStorage.getItem("access_token") || "",
+});
 
 const queryClient = new QueryClient()
 
