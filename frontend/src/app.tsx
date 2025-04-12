@@ -15,7 +15,7 @@ client.setConfig({
   auth: () => localStorage.getItem("access_token") || "",
 });
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 // Set up a Router instance
 const router = createRouter({
@@ -57,4 +57,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

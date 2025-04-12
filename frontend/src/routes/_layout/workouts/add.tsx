@@ -1,24 +1,21 @@
-import { Button, Grid2, TextField } from "@mui/material"
+import { Button, Grid2, TextField } from "@mui/material";
 import {
   HeaderLayout,
   useNotificationCenter,
-} from "@pautena/react-design-system"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createFileRoute, redirect } from "@tanstack/react-router"
-import { type SubmitHandler, useForm } from "react-hook-form"
-import {
-  type ApiError,
-  type WorkoutCreate,
-  WorkoutsService,
-} from "../../../client"
+} from "@pautena/react-design-system";
+import { useQueryClient } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
+import { type SubmitHandler, useForm } from "react-hook-form";
+import type { WorkoutCreate } from "../../../client";
+import { useCreateWorkoutMutation } from "../../../features/workouts/workouts.client";
 
 export const Route = createFileRoute("/_layout/workouts/add")({
   component: AddWorkout,
-})
+});
 
 function AddWorkout() {
-  const queryClient = useQueryClient()
-  const { show } = useNotificationCenter()
+  const queryClient = useQueryClient();
+  const { show } = useNotificationCenter();
 
   const {
     register,
@@ -28,32 +25,13 @@ function AddWorkout() {
     defaultValues: {
       name: "",
     },
-  })
+  });
 
-  const mutation = useMutation({
-    mutationFn: (data: WorkoutCreate) =>
-      WorkoutsService.createWorkout({ requestBody: data }),
-    onSuccess: () => {
-      show({
-        severity: "success",
-        message: "Item created",
-      })
-    },
-    onError: (err: ApiError) => {
-      show({
-        severity: "error",
-        message: err.message,
-      })
-      redirect({ to: "/workouts", search: { page: 0 }, throw: true })
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["workouts"] })
-    },
-  })
+  const mutation = useCreateWorkoutMutation();
 
   const onSubmit: SubmitHandler<WorkoutCreate> = (data) => {
-    mutation.mutate(data)
-  }
+    mutation.mutate(data);
+  };
 
   return (
     <HeaderLayout title="Add workout" loading={isSubmitting}>
@@ -102,5 +80,5 @@ function AddWorkout() {
         </Grid2>
       </Grid2>
     </HeaderLayout>
-  )
+  );
 }
