@@ -19,7 +19,7 @@ const NotFound = () => {
         Go back
       </Button>
     </Box>
-  )
-}
+  );
+};
 
 export default NotFound

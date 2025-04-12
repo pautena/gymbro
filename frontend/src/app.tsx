@@ -11,8 +11,8 @@ import { routeTree } from "./routeTree.gen";
 import { ColorModeContext, createTheme } from "./theme";
 
 client.setConfig({
-	baseUrl: import.meta.env.VITE_API_URL,
-	auth: () => localStorage.getItem("access_token") || "",
+  baseUrl: import.meta.env.VITE_API_URL,
+  auth: () => localStorage.getItem("access_token") || "",
 });
 
 const queryClient = new QueryClient()
@@ -28,18 +28,18 @@ const router = createRouter({
   // This will ensure that the loader is always called when the route is preloaded or visited
   defaultPreloadStaleTime: 0,
   scrollRestoration: true,
-})
+});
 
 // Register things for typesafety
 declare module "@tanstack/react-router" {
   interface Register {
-    router: typeof router
+    router: typeof router;
   }
 }
 
 function App() {
-  const [colorMode, setColorMode] = useState<PaletteMode>("light")
-  const theme = useMemo(() => createTheme(colorMode), [colorMode])
+  const [colorMode, setColorMode] = useState<PaletteMode>("light");
+  const theme = useMemo(() => createTheme(colorMode), [colorMode]);
 
   return (
     <StrictMode>
@@ -54,7 +54,7 @@ function App() {
         </ColorModeContext.Provider>
       </ThemeProvider>
     </StrictMode>
-  )
+  );
 }
 
 export default App

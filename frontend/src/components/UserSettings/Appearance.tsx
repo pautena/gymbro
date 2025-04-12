@@ -1,9 +1,9 @@
-import { Grid2, MenuItem, type PaletteMode, Typography } from "@mui/material"
-import { Select } from "@pautena/react-design-system"
-import { useColorMode } from "../../theme"
+import { Grid2, MenuItem, type PaletteMode, Typography } from "@mui/material";
+import { Select } from "@pautena/react-design-system";
+import { useColorMode } from "../../theme";
 
 const Appearance = () => {
-  const { colorMode, setColorMode } = useColorMode()
+  const { colorMode, setColorMode } = useColorMode();
 
   return (
     <Grid2 container spacing={2}>
@@ -22,6 +22,6 @@ const Appearance = () => {
         </Select>
       </Grid2>
     </Grid2>
-  )
-}
-export default Appearance
+  );
+};
+export default Appearance;

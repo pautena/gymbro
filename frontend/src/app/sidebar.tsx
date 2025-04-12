@@ -1,7 +1,7 @@
-import DashboardIcon from "@mui/icons-material/Dashboard"
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter"
-import ListIcon from "@mui/icons-material/List"
-import type { DrawerNavigation } from "@pautena/react-design-system"
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ListIcon from "@mui/icons-material/List";
+import type { DrawerNavigation } from "@pautena/react-design-system";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
 export function useGetSidebarNav(): DrawerNavigation {
   return [
@@ -26,5 +26,5 @@ export function useGetSidebarNav(): DrawerNavigation {
       icon: <FitnessCenterIcon />,
       href: "/workouts",
     },
-  ]
+  ];
 }
