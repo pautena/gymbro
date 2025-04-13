@@ -43,7 +43,7 @@ function Workouts() {
 
   useEffect(() => {
     if (hasNextPage) {
-      queryClient.prefetchQuery(readWorkoutsQueryOptions({ page: page + 1 }));
+      queryClient.prefetchQuery(readWorkoutsQueryOptions({ page: page + 1, pageSize: PAGE_SIZE }));
     }
   }, [page, queryClient, hasNextPage]);
 

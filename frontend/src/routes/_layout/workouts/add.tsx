@@ -14,8 +14,7 @@ export const Route = createFileRoute("/_layout/workouts/add")({
 });
 
 function AddWorkout() {
-  const queryClient = useQueryClient();
-  const { show } = useNotificationCenter();
+  const navigate = Route.useNavigate();
 
   const {
     register,
@@ -27,7 +26,12 @@ function AddWorkout() {
     },
   });
 
-  const mutation = useCreateWorkoutMutation();
+  const mutation = useCreateWorkoutMutation({
+    onSuccess: () => {
+      navigate({ to: "/workouts", search: {page:0} });
+    }
+
+  });
 
   const onSubmit: SubmitHandler<WorkoutCreate> = (data) => {
     mutation.mutate(data);
@@ -66,7 +70,7 @@ function AddWorkout() {
         <Grid2 size={12}>
           <TextField
             {...register("date", { required: true })}
-            label="date"
+            label="date (YYYY-MM-DD)"
             fullWidth
             variant="outlined"
             error={!!errors.name}
