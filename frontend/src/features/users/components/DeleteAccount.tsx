@@ -1,7 +1,7 @@
+import useAuth from "@/features/auth/useAuth";
+import { useDeleteUserMeMutation } from "@/features/users/users.client";
 import { Button, DialogContentText, Grid2, Typography } from "@mui/material";
 import { ConfirmDialog, useDialog } from "@pautena/react-design-system";
-import { useDeleteUserMeMutation } from "../../features/users/users.client";
-import useAuth from "../../hooks/useAuth";
 
 const DeleteAccount = () => {
   const { isOpen, open, close } = useDialog();
