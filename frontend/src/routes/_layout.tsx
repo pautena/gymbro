@@ -1,18 +1,23 @@
-import AccountCircle from "@mui/icons-material/AccountCircle"
-import { Box, Divider, IconButton, Menu, MenuItem } from "@mui/material"
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { Box, Divider, IconButton, Menu, MenuItem } from "@mui/material";
 import {
   Drawer,
   DrawerAppBar,
   DrawerContent,
   DrawerLayout,
   LoadingArea,
-} from "@pautena/react-design-system"
-import { useQueryClient } from "@tanstack/react-query"
-import { Link, Outlet, createFileRoute, redirect } from "@tanstack/react-router"
-import { useState } from "react"
-import { useGetSidebarNav } from "../app/sidebar"
-import type { UserPublic } from "../client"
-import useAuth, { isLoggedIn } from "../hooks/useAuth"
+} from "@pautena/react-design-system";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  Link,
+  Outlet,
+  createFileRoute,
+  redirect,
+} from "@tanstack/react-router";
+import { useState } from "react";
+import { useGetSidebarNav } from "../app/sidebar";
+import type { UserPublic } from "../client";
+import useAuth, { isLoggedIn } from "../hooks/useAuth";
 
 export const Route = createFileRoute("/_layout")({
   component: Layout,
@@ -20,30 +25,30 @@ export const Route = createFileRoute("/_layout")({
     if (!isLoggedIn()) {
       throw redirect({
         to: "/login",
-      })
+      });
     }
   },
-})
+});
 
 function Layout() {
-  const { isLoading, logout } = useAuth()
-  const queryClient = useQueryClient()
-  const currentUser = queryClient.getQueryData<UserPublic>(["currentUser"])
-  const sidebarNav = useGetSidebarNav()
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const { isLoading, logout } = useAuth();
+  const queryClient = useQueryClient();
+  const currentUser = queryClient.getQueryData<UserPublic>(["currentUser"]);
+  const sidebarNav = useGetSidebarNav();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   const handleLogout = () => {
-    logout()
-    handleClose()
-  }
+    logout();
+    handleClose();
+  };
 
   const drawerAppBarContent = (
     <Box display="flex" justifyContent="flex-end" flexGrow={1}>
@@ -84,7 +89,7 @@ function Layout() {
         <MenuItem onClick={handleLogout}>Log out</MenuItem>
       </Menu>
     </Box>
-  )
+  );
 
   return (
     <DrawerLayout
@@ -99,5 +104,5 @@ function Layout() {
     >
       {isLoading ? <LoadingArea /> : <Outlet />}
     </DrawerLayout>
-  )
+  );
 }

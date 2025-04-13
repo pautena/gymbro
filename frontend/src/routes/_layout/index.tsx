@@ -1,15 +1,15 @@
-import { Content } from "@pautena/react-design-system"
-import { createFileRoute } from "@tanstack/react-router"
+import { Content } from "@pautena/react-design-system";
+import { createFileRoute } from "@tanstack/react-router";
 
-import { Grid2, Typography } from "@mui/material"
-import useAuth from "../../hooks/useAuth"
+import { Grid2, Typography } from "@mui/material";
+import useAuth from "../../hooks/useAuth";
 
 export const Route = createFileRoute("/_layout/")({
   component: Dashboard,
-})
+});
 
 function Dashboard() {
-  const { user: currentUser } = useAuth()
+  const { user: currentUser } = useAuth();
 
   return (
     <Content>
@@ -24,5 +24,5 @@ function Dashboard() {
         </Grid2>
       </Grid2>
     </Content>
-  )
+  );
 }
