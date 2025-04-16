@@ -18,7 +18,7 @@ export type ItemCreate = {
     description?: string | null;
 };
 
-export type ItemPublic = {
+export type ItemSchema = {
     title: string;
     description?: string | null;
     id: string;
@@ -30,8 +30,8 @@ export type ItemUpdate = {
     description?: string | null;
 };
 
-export type ItemsPublic = {
-    data: Array<ItemPublic>;
+export type ItemsSchema = {
+    data: Array<ItemSchema>;
     count: number;
 };
 
@@ -62,18 +62,18 @@ export type UserCreate = {
     password: string;
 };
 
-export type UserPublic = {
+export type UserRegister = {
+    email: string;
+    password: string;
+    full_name?: string | null;
+};
+
+export type UserSchema = {
     email: string;
     is_active?: boolean;
     is_superuser?: boolean;
     full_name?: string | null;
     id: string;
-};
-
-export type UserRegister = {
-    email: string;
-    password: string;
-    full_name?: string | null;
 };
 
 export type UserUpdate = {
@@ -89,8 +89,8 @@ export type UserUpdateMe = {
     email?: string | null;
 };
 
-export type UsersPublic = {
-    data: Array<UserPublic>;
+export type UsersSchema = {
+    data: Array<UserSchema>;
     count: number;
 };
 
@@ -147,7 +147,7 @@ export type ItemsReadItemsResponses = {
     /**
      * Successful Response
      */
-    200: ItemsPublic;
+    200: ItemsSchema;
 };
 
 export type ItemsReadItemsResponse = ItemsReadItemsResponses[keyof ItemsReadItemsResponses];
@@ -172,7 +172,7 @@ export type ItemsCreateItemResponses = {
     /**
      * Successful Response
      */
-    200: ItemPublic;
+    200: ItemSchema;
 };
 
 export type ItemsCreateItemResponse = ItemsCreateItemResponses[keyof ItemsCreateItemResponses];
@@ -226,7 +226,7 @@ export type ItemsReadItemResponses = {
     /**
      * Successful Response
      */
-    200: ItemPublic;
+    200: ItemSchema;
 };
 
 export type ItemsReadItemResponse = ItemsReadItemResponses[keyof ItemsReadItemResponses];
@@ -253,7 +253,7 @@ export type ItemsUpdateItemResponses = {
     /**
      * Successful Response
      */
-    200: ItemPublic;
+    200: ItemSchema;
 };
 
 export type ItemsUpdateItemResponse = ItemsUpdateItemResponses[keyof ItemsUpdateItemResponses];
@@ -294,7 +294,7 @@ export type LoginTestTokenResponses = {
     /**
      * Successful Response
      */
-    200: UserPublic;
+    200: UserSchema;
 };
 
 export type LoginTestTokenResponse = LoginTestTokenResponses[keyof LoginTestTokenResponses];
@@ -444,7 +444,7 @@ export type UsersReadUsersResponses = {
     /**
      * Successful Response
      */
-    200: UsersPublic;
+    200: UsersSchema;
 };
 
 export type UsersReadUsersResponse = UsersReadUsersResponses[keyof UsersReadUsersResponses];
@@ -469,7 +469,7 @@ export type UsersCreateUserResponses = {
     /**
      * Successful Response
      */
-    200: UserPublic;
+    200: UserSchema;
 };
 
 export type UsersCreateUserResponse = UsersCreateUserResponses[keyof UsersCreateUserResponses];
@@ -501,7 +501,7 @@ export type UsersReadUserMeResponses = {
     /**
      * Successful Response
      */
-    200: UserPublic;
+    200: UserSchema;
 };
 
 export type UsersReadUserMeResponse = UsersReadUserMeResponses[keyof UsersReadUserMeResponses];
@@ -526,7 +526,7 @@ export type UsersUpdateUserMeResponses = {
     /**
      * Successful Response
      */
-    200: UserPublic;
+    200: UserSchema;
 };
 
 export type UsersUpdateUserMeResponse = UsersUpdateUserMeResponses[keyof UsersUpdateUserMeResponses];
@@ -576,7 +576,7 @@ export type UsersRegisterUserResponses = {
     /**
      * Successful Response
      */
-    200: UserPublic;
+    200: UserSchema;
 };
 
 export type UsersRegisterUserResponse = UsersRegisterUserResponses[keyof UsersRegisterUserResponses];
@@ -630,7 +630,7 @@ export type UsersReadUserByIdResponses = {
     /**
      * Successful Response
      */
-    200: UserPublic;
+    200: UserSchema;
 };
 
 export type UsersReadUserByIdResponse = UsersReadUserByIdResponses[keyof UsersReadUserByIdResponses];
@@ -657,7 +657,7 @@ export type UsersUpdateUserResponses = {
     /**
      * Successful Response
      */
-    200: UserPublic;
+    200: UserSchema;
 };
 
 export type UsersUpdateUserResponse = UsersUpdateUserResponses[keyof UsersUpdateUserResponses];
