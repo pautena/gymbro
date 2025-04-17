@@ -44,6 +44,13 @@ export type NewPassword = {
     new_password: string;
 };
 
+export type PrivateUserCreate = {
+    email: string;
+    password: string;
+    full_name: string;
+    is_verified?: boolean;
+};
+
 export type Token = {
     access_token: string;
     token_type?: string;
@@ -106,7 +113,7 @@ export type WorkoutCreate = {
     date?: string;
 };
 
-export type WorkoutPublic = {
+export type WorkoutSchema = {
     name: string;
     notes?: string | null;
     date?: string;
@@ -119,8 +126,8 @@ export type WorkoutUpdate = {
     date?: string | null;
 };
 
-export type WorkoutsPublic = {
-    data: Array<WorkoutPublic>;
+export type WorkoutsSchema = {
+    data: Array<WorkoutSchema>;
     count: number;
 };
 
@@ -685,7 +692,7 @@ export type WorkoutsReadWorkoutsResponses = {
     /**
      * Successful Response
      */
-    200: WorkoutsPublic;
+    200: WorkoutsSchema;
 };
 
 export type WorkoutsReadWorkoutsResponse = WorkoutsReadWorkoutsResponses[keyof WorkoutsReadWorkoutsResponses];
@@ -710,7 +717,7 @@ export type WorkoutsCreateWorkoutResponses = {
     /**
      * Successful Response
      */
-    200: WorkoutPublic;
+    200: WorkoutSchema;
 };
 
 export type WorkoutsCreateWorkoutResponse = WorkoutsCreateWorkoutResponses[keyof WorkoutsCreateWorkoutResponses];
@@ -764,7 +771,7 @@ export type WorkoutsReadWorkoutResponses = {
     /**
      * Successful Response
      */
-    200: WorkoutPublic;
+    200: WorkoutSchema;
 };
 
 export type WorkoutsReadWorkoutResponse = WorkoutsReadWorkoutResponses[keyof WorkoutsReadWorkoutResponses];
@@ -791,10 +798,35 @@ export type WorkoutsUpdateWorkoutResponses = {
     /**
      * Successful Response
      */
-    200: WorkoutPublic;
+    200: WorkoutSchema;
 };
 
 export type WorkoutsUpdateWorkoutResponse = WorkoutsUpdateWorkoutResponses[keyof WorkoutsUpdateWorkoutResponses];
+
+export type PrivateCreateUserData = {
+    body: PrivateUserCreate;
+    path?: never;
+    query?: never;
+    url: '/api/v1/private/users/';
+};
+
+export type PrivateCreateUserErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type PrivateCreateUserError = PrivateCreateUserErrors[keyof PrivateCreateUserErrors];
+
+export type PrivateCreateUserResponses = {
+    /**
+     * Successful Response
+     */
+    200: UserSchema;
+};
+
+export type PrivateCreateUserResponse = PrivateCreateUserResponses[keyof PrivateCreateUserResponses];
 
 export type ClientOptions = {
     baseUrl: `${string}://${string}` | (string & {});
