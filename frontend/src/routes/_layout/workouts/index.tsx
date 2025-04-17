@@ -3,7 +3,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { z } from "zod";
 
-import type { WorkoutSchema, WorkoutsSchema } from "@/client";
+import type { WorkoutSchema } from "@/client";
 import {
   readWorkoutsQueryOptions,
   useReadWorkoutsQuery,
@@ -49,7 +49,7 @@ function Workouts() {
     }
   }, [page, queryClient, hasNextPage]);
 
-  const columns: GridColDef<WorkoutsSchema>[] = [
+  const columns: GridColDef<WorkoutSchema>[] = [
     {
       field: "id",
       width: 350,
