@@ -3,7 +3,8 @@ from sqlmodel import Session
 from app.tests.utils.user import create_random_user
 from app.tests.utils.utils import random_lower_string
 from app.workouts import repository as workout_repository
-from app.workouts.models import Workout, WorkoutCreate
+from app.workouts.models import Workout
+from app.workouts.schemas import WorkoutCreate
 
 
 def create_random_workout(db: Session) -> Workout:

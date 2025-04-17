@@ -2,7 +2,8 @@ import uuid
 
 from sqlmodel import Session
 
-from app.workouts.models import Workout, WorkoutCreate
+from app.workouts.models import Workout
+from app.workouts.schemas import WorkoutCreate
 
 
 def create_workout(

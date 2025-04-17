@@ -8,16 +8,18 @@ from app.models import Message
 from app.users.dependencies import CurrentUser, SessionDep
 from app.workouts.models import (
     Workout,
+)
+from app.workouts.schemas import (
     WorkoutCreate,
-    WorkoutPublic,
-    WorkoutsPublic,
+    WorkoutSchema,
+    WorkoutsSchema,
     WorkoutUpdate,
 )
 
 router = APIRouter(prefix="/workouts", tags=["workouts"])
 
 
-@router.get("/", response_model=WorkoutsPublic)
+@router.get("/", response_model=WorkoutsSchema)
 def read_workouts(
     session: SessionDep, current_user: CurrentUser, skip: int = 0, limit: int = 100
 ) -> Any:
@@ -45,10 +47,10 @@ def read_workouts(
         )
         workouts = session.exec(statement).all()
 
-    return WorkoutsPublic(data=workouts, count=count)
+    return WorkoutsSchema(data=workouts, count=count)
 
 
-@router.get("/{id}", response_model=WorkoutPublic)
+@router.get("/{id}", response_model=WorkoutSchema)
 def read_workout(session: SessionDep, current_user: CurrentUser, id: uuid.UUID) -> Any:
     """
     Get workout by ID.
@@ -61,7 +63,7 @@ def read_workout(session: SessionDep, current_user: CurrentUser, id: uuid.UUID) 
     return workout
 
 
-@router.post("/", response_model=WorkoutPublic)
+@router.post("/", response_model=WorkoutSchema)
 def create_workout(
     *, session: SessionDep, current_user: CurrentUser, workout_in: WorkoutCreate
 ) -> Any:
@@ -75,7 +77,7 @@ def create_workout(
     return workout
 
 
-@router.put("/{id}", response_model=WorkoutPublic)
+@router.put("/{id}", response_model=WorkoutSchema)
 def update_workout(
     *,
     session: SessionDep,
