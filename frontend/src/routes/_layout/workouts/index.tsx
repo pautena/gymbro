@@ -3,6 +3,11 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { z } from "zod";
 
+import type { WorkoutSchema } from "@/client";
+import {
+  readWorkoutsQueryOptions,
+  useReadWorkoutsQuery,
+} from "@/features/workouts/workouts.client";
 import {
   DataGrid,
   type GridColDef,
@@ -10,11 +15,6 @@ import {
   type GridRowParams,
 } from "@mui/x-data-grid";
 import { HeaderLayout } from "@pautena/react-design-system";
-import type { WorkoutPublic } from "../../../client";
-import {
-  readWorkoutsQueryOptions,
-  useReadWorkoutsQuery,
-} from "../../../features/workouts/workouts.client";
 
 const PAGE_SIZE = 5;
 const workoutsSearchSchema = z.object({
@@ -43,11 +43,13 @@ function Workouts() {
 
   useEffect(() => {
     if (hasNextPage) {
-      queryClient.prefetchQuery(readWorkoutsQueryOptions({ page: page + 1, pageSize: PAGE_SIZE }));
+      queryClient.prefetchQuery(
+        readWorkoutsQueryOptions({ page: page + 1, pageSize: PAGE_SIZE }),
+      );
     }
   }, [page, queryClient, hasNextPage]);
 
-  const columns: GridColDef<WorkoutPublic>[] = [
+  const columns: GridColDef<WorkoutSchema>[] = [
     {
       field: "id",
       width: 350,
@@ -77,7 +79,7 @@ function Workouts() {
         paginationMode="server"
         rows={workouts?.data || []}
         rowCount={workouts?.count || 0}
-        onRowClick={({ row: { id } }: GridRowParams<WorkoutPublic>) =>
+        onRowClick={({ row: { id } }: GridRowParams<WorkoutSchema>) =>
           navigate({ to: "/workouts/$id", params: { id } })
         }
         pageSizeOptions={[PAGE_SIZE]}

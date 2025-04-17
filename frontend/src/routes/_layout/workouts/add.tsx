@@ -28,9 +28,8 @@ function AddWorkout() {
 
   const mutation = useCreateWorkoutMutation({
     onSuccess: () => {
-      navigate({ to: "/workouts", search: {page:0} });
-    }
-
+      navigate({ to: "/workouts", search: { page: 0 } });
+    },
   });
 
   const onSubmit: SubmitHandler<WorkoutCreate> = (data) => {
